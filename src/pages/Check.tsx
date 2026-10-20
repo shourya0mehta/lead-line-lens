@@ -61,6 +61,16 @@ export default function Check() {
 function Results({ result }: { result: LookupResult }) {
   const n = result.records.length
 
+  // Nothing left after cleanup (e.g. someone typed only "Apt 4B"), so don't show No match for “”.
+  if (!result.query) {
+    return (
+      <div className="empty">
+        <p><strong>That doesn&apos;t look like a street address yet.</strong></p>
+        <p>Type a house number and street, like 175 W Broadway.</p>
+      </div>
+    )
+  }
+
   if (n === 0) {
     return (
       <div className="empty">

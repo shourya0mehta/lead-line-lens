@@ -27,14 +27,19 @@ const SUFFIXES: Record<string, string> = {
 
 const DIRECTIONS: Record<string, string> = { E: 'EAST', W: 'WEST', N: 'NORTH', S: 'SOUTH' }
 
+// Safe to expand anywhere after the house number, so lettered avenues work ("14 Ave A" -> "14 AVENUE A").
+// ST is NOT here: in the middle of a name it usually means Saint ("92 ST MARKS PLACE").
+const EXPAND_ANYWHERE: Record<string, string> = { AVE: 'AVENUE', AV: 'AVENUE' }
+
 // "175 W Broadway, Apt 4B, New York, NY" -> "175 WEST BROADWAY"
+// "175 W Broadway #4B"                  -> "175 WEST BROADWAY"
 // "350 56th St"                         -> "350 56 STREET"
 export function normalizeAddress(raw: string): string {
   const street = raw.split(',')[0] ?? ''
   const cleaned = street
     .toUpperCase()
-    .replace(/\b(APT|APARTMENT|UNIT|STE|SUITE|FL|FLOOR)\b.*$/, '')
-    .replace(/[.#]/g, ' ')
+    .replace(/(?:\b(?:APT|APARTMENT|UNIT|STE|SUITE|FL|FLOOR)\b|#).*$/, '') // drop apartment/unit info
+    .replace(/\./g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
 
@@ -43,7 +48,8 @@ export function normalizeAddress(raw: string): string {
     .map((token, i) => {
       let t = token.replace(/^(\d+)(ST|ND|RD|TH)$/, '$1')
       if (i === 1 && DIRECTIONS[t]) t = DIRECTIONS[t]
-      if (i > 0 && i === tokens.length - 1 && SUFFIXES[t]) t = SUFFIXES[t]
+      if (i > 0 && EXPAND_ANYWHERE[t]) t = EXPAND_ANYWHERE[t]
+      else if (i > 0 && i === tokens.length - 1 && SUFFIXES[t]) t = SUFFIXES[t]
       return t
     })
     .join(' ')
