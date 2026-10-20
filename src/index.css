@@ -172,7 +172,7 @@ p { margin: 0 0 0.8rem; }
 
 /* About */
 .about section { max-width: 46rem; margin-bottom: 2.75rem; }
-.about section.callout { margin-bottom: 0; }
+.about section:last-child { margin-bottom: 0; }
 .record-table {
   width: 100%; border-collapse: collapse; background: var(--card);
   border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: 0.93rem;
@@ -181,8 +181,6 @@ p { margin: 0 0 0.8rem; }
 .record-table th { background: var(--sand); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .record-table .num { text-align: right; font-variant-numeric: tabular-nums; }
 .record-table .confidence .eyebrow { display: none; }
-.callout { background: var(--water-soft); border-radius: 12px; padding: 1rem 1.25rem; }
-.callout p { margin: 0; }
 
 @media (max-width: 720px) {
   .stats { grid-template-columns: repeat(2, 1fr); }

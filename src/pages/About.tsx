@@ -6,7 +6,7 @@ export default function About() {
     <div className="about">
       <section>
         <span className="eyebrow">Why this exists</span>
-        <h1>A letter that says &ldquo;we don&apos;t know&rdquo; isn&apos;t enough</h1>
+        <h1>NYC doesn&apos;t know what 114,473 water pipes are made of</h1>
         <p className="lede">
           In 2017, a model built by university researchers told Flint which homes most likely had lead pipes. Crews
           following it found lead at about 70% of the homes they dug up. In 2018 the city&apos;s contractor stopped
@@ -45,13 +45,6 @@ export default function About() {
           A map of every property, then a model that estimates how likely each unknown line is to be lead. It will
           learn from the roughly 208,000 properties where someone saw the pipe, and it will be graded the way
           Flint&apos;s was: when a crew digs where the model points, how often is there lead?
-        </p>
-      </section>
-
-      <section className="callout">
-        <p>
-          <strong>What this site won&apos;t do:</strong> tell you your water is safe. It shows the city&apos;s records,
-          not a test of your water. Call 311 for a free lead test kit.
         </p>
       </section>
     </div>
